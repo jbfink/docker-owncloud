@@ -6,9 +6,12 @@ ENV APP_DATA /var/www/owncloud/data
 ENV SSL_SUBJ /C=DE/ST=BY/L=Munich/O=Private/CN=files.rjung.org
 ##### END CONFIG
 
+RUN echo 'deb http://archive.ubuntu.com/ubuntu precise multiverse' >> /etc/apt/sources.list
+RUN echo 'deb http://archive.ubuntu.com/ubuntu precise universe' >> /etc/apt/sources.list
 RUN echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/community/xUbuntu_12.04/ /' >> /etc/apt/sources.list.d/owncloud.list
+RUN apt-get install -y wget python-software-properties
 
-RUN apt-get install -y wget
+RUN add-apt-repository ppa:nginx/stable
 
 RUN wget -qO - http://download.opensuse.org/repositories/isv:ownCloud:community/xUbuntu_12.04/Release.key  | apt-key add -
 RUN apt-get -y update
